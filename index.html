@@ -66,18 +66,19 @@ input,select,textarea{width:100%;background:var(--bg);border:1.5px solid var(--b
 <button class="btn btn2" onclick="closeAdmin()">Fermer</button></div></div>
 <div id="toast" class="toast hide"></div>
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzyDff6-po3nmaa-rMO7cVZnB52XfxQyX52LpEDRSUHta5NERaGAT7-_UYEfXF3J88cEg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycby5HPhjD9jiQ-9dS9L_K2b8TRw3cztRqG2N0lJKmHgciEzPn1cnfDiokFce0LbZ3y0OLg/exec";
 const FLAGS={France:"🇫🇷",Mexico:"🇲🇽","South Africa":"🇿🇦","South Korea":"🇰🇷","Czech Republic":"🇨🇿",Canada:"🇨🇦","Bosnia & Herzegovina":"🇧🇦",Qatar:"🇶🇦",Switzerland:"🇨🇭",Brazil:"🇧🇷",Morocco:"🇲🇦",Haiti:"🇭🇹",Scotland:"🏴",USA:"🇺🇸",Paraguay:"🇵🇾",Australia:"🇦🇺",Turkey:"🇹🇷",Germany:"🇩🇪","Curaçao":"🇨🇼","Ivory Coast":"🇨🇮",Ecuador:"🇪🇨",Netherlands:"🇳🇱",Japan:"🇯🇵",Sweden:"🇸🇪",Tunisia:"🇹🇳",Belgium:"🇧🇪",Egypt:"🇪🇬",Iran:"🇮🇷","New Zealand":"🇳🇿",Spain:"🇪🇸","Cape Verde":"🇨🇻","Saudi Arabia":"🇸🇦",Uruguay:"🇺🇾",Senegal:"🇸🇳",Iraq:"🇮🇶",Norway:"🇳🇴",Argentina:"🇦🇷",Algeria:"🇩🇿",Austria:"🇦🇹",Jordan:"🇯🇴",Portugal:"🇵🇹","DR Congo":"🇨🇩",Uzbekistan:"🇺🇿",Colombia:"🇨🇴",England:"🏴",Croatia:"🇭🇷",Ghana:"🇬🇭",Panama:"🇵🇦"};
 const FUN_ICONS={leader:"🏆",target:"🎯",rate:"📈",joker:"⭐",active:"📌",fire:"🔥",lanterne:"🧯",blackcat:"🐈‍⬛",zero:"🥶",boom:"💥",topScorerVote:"⚽",scorerVote:"⚽"};
 let mode="login", user=null, matches=[], pronos={}, classement=null, buteur=null, joueurs=[], butsMatch={}, equipes=[], teamMap={}, currentFilter="all", selectedMatch=null, selectedPlayer=null;
 
 function cleanText(v){return String(v??"")
-.replaceAll("√©","é").replaceAll("√®","è").replaceAll("√™","ê").replaceAll("√´","ë")
-.replaceAll("√†","à").replaceAll("√¢","â").replaceAll("√ª","û").replaceAll("√π","ù")
-.replaceAll("√¥","ô").replaceAll("√Æ","î").replaceAll("√§","ä").replaceAll("√º","ü")
-.replaceAll("√ç","ç").replaceAll("‚Äô","’").replaceAll("‚Äî","—").replaceAll("¬∑","·")
+.replaceAll("é","é").replaceAll("è","è").replaceAll("ê","ê").replaceAll("ë","ë")
+.replaceAll("à","à").replaceAll("â","â").replaceAll("û","û").replaceAll("ù","ù")
+.replaceAll("ô","ô").replaceAll("î","î").replaceAll("ä","ä").replaceAll("ü","ü")
+.replaceAll("√ç","ç").replaceAll("’","’").replaceAll("—","—").replaceAll("·","·")
 .replaceAll("Ã©","é").replaceAll("Ã¨","è").replaceAll("Ãª","ê").replaceAll("Ã ","à")
-.replaceAll("Ã§","ç").replaceAll("Ã´","ô").replaceAll("Ã»","û");}
+.replaceAll("Ã§","ç").replaceAll("Ã´","ô").replaceAll("Ã»","û")
+.replaceAll("r‚àö¬©ussite","réussite").replaceAll("s‚àö¬©rie","série").replaceAll("d‚Äô","d’").replaceAll("√©","é").replaceAll("√®","è").replaceAll("√†","à").replaceAll("‚Äô","’").replaceAll("‚Äî","—").replaceAll("¬∑","·");}
 function api(action,params={}){let url=API_URL+"?action="+encodeURIComponent(action);Object.keys(params).forEach(k=>url+="&"+encodeURIComponent(k)+"="+encodeURIComponent(params[k]));return fetch(url).then(r=>r.json()).then(j=>{if(!j.ok)throw new Error(j.error);return j.data;});}
 function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.remove("hide");setTimeout(()=>e.classList.add("hide"),2200)}
 function drawAuth(){tabLogin.classList.toggle("active",mode==="login");tabReg.classList.toggle("active",mode==="register");authBtn.textContent=mode==="login"?"Se connecter":"Créer mon compte";authErr.textContent=""}
